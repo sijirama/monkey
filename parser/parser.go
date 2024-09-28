@@ -19,9 +19,11 @@ func NewParser(l *lexer.Lexer) *Parser {
 	// Read two tokens, so curToken and peekToken are both set
 	p.nextToken()
 	p.nextToken()
+
 	return p
 }
 
+// NOTE: we repeatedly call NextToken() to get the next token in the input.
 func (p *Parser) nextToken() {
 	p.curToken = p.peekToken
 	p.peekToken = p.l.NextToken()
