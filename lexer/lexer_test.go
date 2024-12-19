@@ -22,6 +22,10 @@ return false;
 }
 10 == 10;
 10 != 9;
+"foobar"
+"foo bar"
+5
+10
 `
 
 	tests := []struct {
@@ -101,6 +105,10 @@ return false;
 		{token.NOT_EQ, "!="},
 		{token.INT, "9"},
 		{token.SEMICOLON, ";"},
+		{token.STRING, "foobar"},
+		{token.STRING, "foo bar"},
+		{token.INT, "5"},
+		{token.INT, "10"},
 		{token.EOF, ""},
 	}
 

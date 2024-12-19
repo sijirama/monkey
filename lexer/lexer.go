@@ -64,11 +64,8 @@ func (l *Lexer) NextToken() token.Token {
 			tok = newToken(token.ASSIGN, l.char)
 		}
 	case '"':
-		if isLetter(l.peekChar()) {
-			tok.Type = token.STRING
-			tok.Literal = l.readString()
-			return tok
-		}
+		tok.Type = token.STRING
+		tok.Literal = l.readString()
 	case 0:
 		tok.Literal = ""
 		tok.Type = token.EOF
@@ -110,6 +107,17 @@ func (l *Lexer) readChar() {
 }
 
 func (l *Lexer) readString() string {
+	position := l.position + 1
+	for {
+		l.readChar()
+		if l.char == '"' || l.char == 0 {
+			break
+		}
+	}
+	return l.input[position:l.position]
+}
+
+func (l *Lexer) readStringAlt() string {
 	l.readChar() // consume the opening quote
 	result := ""
 	for l.char != '"' {
