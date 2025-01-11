@@ -13,8 +13,8 @@ type Compiler struct {
 
 func New() *Compiler {
 	return &Compiler{
-		instructions: code.Instructions{},
-		constants:    []object.Object{},
+		instructions: code.Instructions{}, // array of bytecode instructions
+		constants:    []object.Object{},   /* constant pool, array of any object to be referred */
 	}
 }
 
@@ -22,14 +22,14 @@ func (c *Compiler) Compile(node ast.Node) error {
 	return nil
 }
 
-type Bytecode struct {
-	Instructions code.Instructions
-	Constants    []object.Object
-}
-
-func (c *Compiler) Bytecode() *Bytecode {
+func (c *Compiler) Bytecode() *Bytecode { // returns the bytcode and the constant pool
 	return &Bytecode{
 		Instructions: c.instructions,
 		Constants:    c.constants,
 	}
+}
+
+type Bytecode struct {
+	Instructions code.Instructions
+	Constants    []object.Object
 }
