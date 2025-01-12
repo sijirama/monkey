@@ -38,7 +38,9 @@ func TestIntegerArithmetic(t *testing.T) {
 	tests := []vmTestCase{
 		{"1", 1},
 		{"2", 2},
-		{"1 + 2", 2}, // FIXME:
+		{"1 + 2", 3},
+		{"1 + 2 + 3", 6},
+		{"1 + 2 + 3 + 5", 11},
 	}
 	runVmTests(t, tests)
 }

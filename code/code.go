@@ -32,8 +32,11 @@ func (ins Instructions) fmtInstruction(def *Definition, operands []int) string {
 			len(operands), operandCount)
 	}
 	switch operandCount {
+	case 0:
+		return def.Name
 	case 1:
 		return fmt.Sprintf("%s %d", def.Name, operands[0])
+
 	}
 	return fmt.Sprintf("ERROR: unhandled operandCount for %s\n", def.Name)
 }
@@ -42,7 +45,7 @@ type Opcode byte
 
 const (
 	OpConstant Opcode = iota //VM executes OpConstant it gets the constant using the operand as an index
-
+	OpAdd
 )
 
 // it’s handy being able to lookup how many operands an opcode has and what its human-readable name is
@@ -59,6 +62,7 @@ var definitions = map[Opcode]*Definition{
 		more than 65536 constants in our Monkey programs
 	*/
 	OpConstant: {"OpConstant", []int{2}},
+	OpAdd:      {"OpAdd", []int{}}, // empty because opadd does not have any operand
 }
 
 func Lookup(op byte) (*Definition, error) {
