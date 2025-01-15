@@ -44,7 +44,7 @@ func (ins Instructions) fmtInstruction(def *Definition, operands []int) string {
 type Opcode byte
 
 const (
-	OpConstant Opcode = iota //VM executes OpConstant it gets the constant using the operand as an index
+	OpConstant Opcode = iota //VM executes OpConstant it gets the constant using the operand as an index, that's why the number of operand for this is 1, it's just the constant index from the constant pool
 	OpAdd
 	OpPop
 	OpSub
@@ -55,7 +55,33 @@ const (
 	OpEqual
 	OpNotEqual
 	OpGreaterThan
+	OpMinus
+	OpBang
 )
+
+var opcodeNames = map[Opcode]string{
+	OpConstant:    "OpConstant",
+	OpAdd:         "OpAdd",
+	OpPop:         "OpPop",
+	OpSub:         "OpSub",
+	OpMul:         "OpMul",
+	OpDiv:         "OpDiv",
+	OpTrue:        "OpTrue",
+	OpFalse:       "OpFalse",
+	OpEqual:       "OpEqual",
+	OpNotEqual:    "OpNotEqual",
+	OpGreaterThan: "OpGreaterThan",
+	OpMinus:       "OpMinus",
+	OpBang:        "OpBang",
+}
+
+func GetOpcodeName(op Opcode) string {
+	name := opcodeNames[op]
+	if name == "" {
+		return fmt.Sprintf("Unknown opcode %d", op)
+	}
+	return name
+}
 
 // it’s handy being able to lookup how many operands an opcode has and what its human-readable name is
 type Definition struct {
@@ -71,7 +97,7 @@ var definitions = map[Opcode]*Definition{
 		more than 65536 constants in our Monkey programs
 	*/
 	OpConstant:    {"OpConstant", []int{2}},
-	OpAdd:         {"OpAdd", []int{}}, // empty because opadd does not have any operand
+	OpAdd:         {"OpAdd", []int{}},
 	OpPop:         {"OpPop", []int{}},
 	OpSub:         {"OpSub", []int{}},
 	OpMul:         {"OpMul", []int{}},
@@ -81,6 +107,8 @@ var definitions = map[Opcode]*Definition{
 	OpEqual:       {"OpEqual", []int{}},
 	OpNotEqual:    {"OpNotEqual", []int{}},
 	OpGreaterThan: {"OpGreaterThan", []int{}},
+	OpMinus:       {"OpMinus", []int{}},
+	OpBang:        {"OpBang", []int{}},
 }
 
 func Lookup(op byte) (*Definition, error) {
