@@ -47,6 +47,9 @@ const (
 	OpConstant Opcode = iota //VM executes OpConstant it gets the constant using the operand as an index
 	OpAdd
 	OpPop
+	OpSub
+	OpMul
+	OpDiv
 )
 
 // it’s handy being able to lookup how many operands an opcode has and what its human-readable name is
@@ -65,6 +68,9 @@ var definitions = map[Opcode]*Definition{
 	OpConstant: {"OpConstant", []int{2}},
 	OpAdd:      {"OpAdd", []int{}}, // empty because opadd does not have any operand
 	OpPop:      {"OpPop", []int{}},
+	OpSub:      {"OpSub", []int{}},
+	OpMul:      {"OpMul", []int{}},
+	OpDiv:      {"OpDiv", []int{}},
 }
 
 func Lookup(op byte) (*Definition, error) {
