@@ -59,6 +59,7 @@ const (
 	OpBang
 	OpJumpNotTruthy
 	OpJump
+	OpNull
 )
 
 var opcodeNames = map[Opcode]string{
@@ -77,6 +78,7 @@ var opcodeNames = map[Opcode]string{
 	OpBang:          "OpBang",
 	OpJumpNotTruthy: "OpJumpNotTruthy",
 	OpJump:          "OpJump",
+	OpNull:          "OpNull",
 }
 
 func GetOpcodeName(op Opcode) string {
@@ -115,6 +117,7 @@ var definitions = map[Opcode]*Definition{
 	OpBang:          {"OpBang", []int{}},
 	OpJumpNotTruthy: {"OpJumpNotTruthy", []int{2}},
 	OpJump:          {"OpJump", []int{2}},
+	OpNull:          {"OpNull", []int{}},
 }
 
 func Lookup(op byte) (*Definition, error) {
