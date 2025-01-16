@@ -57,22 +57,26 @@ const (
 	OpGreaterThan
 	OpMinus
 	OpBang
+	OpJumpNotTruthy
+	OpJump
 )
 
 var opcodeNames = map[Opcode]string{
-	OpConstant:    "OpConstant",
-	OpAdd:         "OpAdd",
-	OpPop:         "OpPop",
-	OpSub:         "OpSub",
-	OpMul:         "OpMul",
-	OpDiv:         "OpDiv",
-	OpTrue:        "OpTrue",
-	OpFalse:       "OpFalse",
-	OpEqual:       "OpEqual",
-	OpNotEqual:    "OpNotEqual",
-	OpGreaterThan: "OpGreaterThan",
-	OpMinus:       "OpMinus",
-	OpBang:        "OpBang",
+	OpConstant:      "OpConstant",
+	OpAdd:           "OpAdd",
+	OpPop:           "OpPop",
+	OpSub:           "OpSub",
+	OpMul:           "OpMul",
+	OpDiv:           "OpDiv",
+	OpTrue:          "OpTrue",
+	OpFalse:         "OpFalse",
+	OpEqual:         "OpEqual",
+	OpNotEqual:      "OpNotEqual",
+	OpGreaterThan:   "OpGreaterThan",
+	OpMinus:         "OpMinus",
+	OpBang:          "OpBang",
+	OpJumpNotTruthy: "OpJumpNotTruthy",
+	OpJump:          "OpJump",
 }
 
 func GetOpcodeName(op Opcode) string {
@@ -96,19 +100,21 @@ var definitions = map[Opcode]*Definition{
 		is then 65536. That should be enough for us, because I don’t think we’re going to reference
 		more than 65536 constants in our Monkey programs
 	*/
-	OpConstant:    {"OpConstant", []int{2}},
-	OpAdd:         {"OpAdd", []int{}},
-	OpPop:         {"OpPop", []int{}},
-	OpSub:         {"OpSub", []int{}},
-	OpMul:         {"OpMul", []int{}},
-	OpDiv:         {"OpDiv", []int{}},
-	OpTrue:        {"OpTrue", []int{}},
-	OpFalse:       {"OpFalse", []int{}},
-	OpEqual:       {"OpEqual", []int{}},
-	OpNotEqual:    {"OpNotEqual", []int{}},
-	OpGreaterThan: {"OpGreaterThan", []int{}},
-	OpMinus:       {"OpMinus", []int{}},
-	OpBang:        {"OpBang", []int{}},
+	OpConstant:      {"OpConstant", []int{2}},
+	OpAdd:           {"OpAdd", []int{}},
+	OpPop:           {"OpPop", []int{}},
+	OpSub:           {"OpSub", []int{}},
+	OpMul:           {"OpMul", []int{}},
+	OpDiv:           {"OpDiv", []int{}},
+	OpTrue:          {"OpTrue", []int{}},
+	OpFalse:         {"OpFalse", []int{}},
+	OpEqual:         {"OpEqual", []int{}},
+	OpNotEqual:      {"OpNotEqual", []int{}},
+	OpGreaterThan:   {"OpGreaterThan", []int{}},
+	OpMinus:         {"OpMinus", []int{}},
+	OpBang:          {"OpBang", []int{}},
+	OpJumpNotTruthy: {"OpJumpNotTruthy", []int{2}},
+	OpJump:          {"OpJump", []int{2}},
 }
 
 func Lookup(op byte) (*Definition, error) {
