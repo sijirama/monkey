@@ -20,8 +20,9 @@ func Start(in io.Reader, out io.Writer) {
 	scanner := bufio.NewScanner(in)
 
 	constants := []object.Object{}
-	globals := make([]object.Object, vm.GlobalsSize)
 	symbolTable := compiler.NewSymbolTable()
+
+	globals := make([]object.Object, vm.GlobalsSize)
 
 	//env := object.NewEnvironment()
 
