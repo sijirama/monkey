@@ -62,6 +62,9 @@ const (
 	OpNull
 	OpGetGlobal
 	OpSetGlobal
+	OpArray
+	OpHash
+	OpIndex
 )
 
 var opcodeNames = map[Opcode]string{
@@ -83,6 +86,9 @@ var opcodeNames = map[Opcode]string{
 	OpNull:          "OpNull",
 	OpGetGlobal:     "OpGetGlobal",
 	OpSetGlobal:     "OpSetGlobal",
+	OpArray:         "OpArray",
+	OpHash:          "OpHash",
+	OpIndex:         "OpIndex",
 }
 
 func GetOpcodeName(op Opcode) string {
@@ -124,6 +130,9 @@ var definitions = map[Opcode]*Definition{
 	OpNull:          {"OpNull", []int{}},
 	OpGetGlobal:     {"OpGetGlobal", []int{2}},
 	OpSetGlobal:     {"OpSetGlobal", []int{2}},
+	OpArray:         {"OpArray", []int{2}},
+	OpHash:          {"OpHash", []int{2}},
+	OpIndex:         {"OpIndex", []int{}},
 }
 
 func Lookup(op byte) (*Definition, error) {
