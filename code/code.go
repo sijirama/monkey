@@ -66,6 +66,8 @@ const (
 	OpHash
 	OpIndex
 	OpCall
+	OpReturnValue
+	OpReturn
 )
 
 var opcodeNames = map[Opcode]string{
@@ -91,6 +93,8 @@ var opcodeNames = map[Opcode]string{
 	OpHash:          "OpHash",
 	OpIndex:         "OpIndex",
 	OpCall:          "OpCall",
+	OpReturnValue:   "OpReturnValue",
+	OpReturn:        "OpReturn",
 }
 
 func GetOpcodeName(op Opcode) string {
@@ -136,6 +140,8 @@ var definitions = map[Opcode]*Definition{
 	OpHash:          {"OpHash", []int{2}},
 	OpIndex:         {"OpIndex", []int{}},
 	OpCall:          {"OpCall", []int{}},
+	OpReturnValue:   {"OpReturnValue", []int{}},
+	OpReturn:        {"OpReturn", []int{}},
 }
 
 func Lookup(op byte) (*Definition, error) {
